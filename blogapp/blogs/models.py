@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import User
+from taggit.managers import TaggableManager
 
 
 # 번호(자동생성), user, 제목(title), 내용(content), image(option), 작성날짜(created_at), 수정날짜(modified_at)
@@ -15,6 +16,8 @@ class Post(models.Model):
     modified_at = models.DateTimeField(auto_now=True)
     # ManyToMany 별도의 테이블
     likes = models.ManyToManyField(User, related_name="likes", blank=True)
+    # 태그
+    tags = TaggableManager()
 
     def __str__(self):
         return self.title

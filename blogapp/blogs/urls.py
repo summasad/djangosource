@@ -17,4 +17,6 @@ urlpatterns = [
     # http://127.0.0.1:8000/blogs/1/comment/create/
     # path("<int:pk>/comment/create/", views.comment_create, name="create"),
     path("comment/create/", views.comment_create, name="comment_create"),
+    # http://127.0.0.1:8000/blogs/1/post/like/
+    path("<int:pk>/post/like/", views.post_like, name="post_like"),
 ]

@@ -10,4 +10,4 @@ class PostForm(forms.ModelForm):
         # fields = "__all__"
         # exclude_fields = ["created_at","modified_at"]
         # 방법 2
-        fields = ["title", "content", "image"]
+        fields = ["title", "content", "image", "tags"]

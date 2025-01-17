@@ -4,6 +4,7 @@ from .forms import PostForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import JsonResponse
+from django.core.paginator import Paginator
 
 # @login_required : 로그인이 안되어 있을 때 로그인 페이지로 이동
 
@@ -70,6 +71,8 @@ def blogs_create(request):
             # 작성자(== 로그인 사용자)
             post.user = request.user
             post.save()
+            # 태그 저장
+            form.save_m2m()
             return redirect("blogs:list")
     else:
         form = PostForm()
@@ -90,7 +93,14 @@ def blogs_detail(request, pk):
 
 def blogs_list(request):
 
+    # 페이지 번호 가져오기
+    #request.Post.get()
+    page = request.Get.get("page", 1)
+
     # 작성일자 내림차순
-    post_list = Post.objects.order_by("-created_at")
+    posts = Post.objects.order_by("-created_at")
+
+    paginator = Paginator(posts, 10)
+    post_list = paginator.get_page(page)
 
     return render(request, "blogs/list.html", {"post_list": post_list})
