@@ -95,7 +95,7 @@ def blogs_list(request):
 
     # 페이지 번호 가져오기
     #request.Post.get()
-    page = request.Get.get("page", 1)
+    page = request.GET.get("page", 1)
 
     # 작성일자 내림차순
     posts = Post.objects.order_by("-created_at")
